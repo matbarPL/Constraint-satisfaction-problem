@@ -4,40 +4,74 @@ import xlsxwriter
 from xlrd import open_workbook
 import subprocess
 from openpyxl import load_workbook
+from Teacher import *
 
 class Timetable():
-    def __init__(self,teacherN,subjectN,roomN):
-        self.conflicts = 0
-        self.records = [Record(teacherN,subjectN,roomN) for i in range(subjectN)]
-        self.teacherN = teacherN
-        self.subjectN = subjectN
+    def __init__(self,teacherList,subjectsList,roomN):
+        self.teacherList = teacherList
+        self.subjectsList = subjectsList
         self.roomN = roomN
+        self.records = []
         
+        for el in subjectsList:
+            for i in range(el.timesPerWeek):
+                self.records.append(Record(self.teacherList,roomN,el.id))
+        self.conflicts = 0
+        
+    def getTeacher(self,idd):
+        for item in self.teacherList:
+            if item.id == idd:
+                return item
+    def getSubject(self,idd):
+        for item in self.subjectsList:
+            if item.id == idd:
+                return item  
+    
     def setConflicts(self):
         self.conflicts = 0
-        dic = {}
-        for i in range(len(self.records)-1):
+        dicSub = dict(zip(self.subjectsList, len(self.subjectsList)*[0]))
+        dic = dict(zip(self.teacherList, len(self.teacherList)*[0]))
+        
+        for i in range(len(self.records)):
+            old = self.conflicts
             fst = self.records[i]
+            teacher = self.getTeacher(fst.teacher.id)
+            subject = self.getSubject(fst.subject_id)
+            if (fst.time_id in teacher.notAvailHours):
+                self.conflicts +=1
+            if (fst.subject_id not in teacher.subjects):
+                self.conflicts +=1
+                
             for j in range(i+1,len(self.records)):
                 snd = self.records[j]
                 if (fst.time_id == snd.time_id):
-                    if (fst.teacher_id == snd.teacher_id):
+                    if (fst.teacher.id == snd.teacher.id):
                         self.conflicts +=1
-                        
                     if (fst.room_id == snd.room_id):
-                        self.conflicts +=1
-                        
-            if (fst.teacher_id) not in dic:
-                dic[fst.teacher_id] = 1
-            else:
-                dic[fst.teacher_id] += 1
-                
-        greater = [(x[0],x[1]) for x in list(dic.items()) if x[1]>4]
+                        self.conflicts +=2
+           
+            dicSub[subject] += 1
+            dic[teacher]    += 1    
+            
+            fst.help = self.conflicts - old 
+            
+        greaterSub = [(x[0],x[1]) for x in list(dicSub.items()) if x[1]!=x[0].timesPerWeek]
+        greater    = [(x[0],x[1]) for x in list(dic.items()) if x[1]>x[0].limit]  
         
-        self.conflicts += sum( [x[1] -4 for x in greater])
-    
+        self.conflicts +=3*sum( [abs(x[1] -x[0].timesPerWeek) for x in greaterSub])
+        self.conflicts += sum( [x[1] -x[0].limit for x in greater])
+        
+    def getWorstRecord(self):
+        return max(self.records, key = lambda x: x.recConflicts)
+        
+    def getRecordId(self, record):
+        for i in range(len(self.records)):
+            if self.records[i] == record:
+                return i
+                
+        
     def generate(self,path,openfile=True):
-        workbook = xlsxwriter.Workbook('timetable.xlsx')
+        workbook = xlsxwriter.Workbook(path.split('/')[-1])
         worksheet = workbook.add_worksheet()
         worksheet.set_default_row(70)
         worksheet.set_row(0,30)
@@ -59,7 +93,7 @@ class Timetable():
         helpRecords = sorted(self.records, key = lambda x : x.time_id)
         last = [None,None]
         for record in helpRecords:
-            rec_str = 'teacher_id '+ str(record.teacher_id) + \
+            rec_str = 'teacher_id '+ str(record.teacher.id) + \
                             ' room_id '+str(record.room_id)+' subject_id '+ \
                             str(record.subject_id)
             where = record.tablePos()
@@ -74,15 +108,6 @@ class Timetable():
                 
         if openfile:
             workbook.close()
-            subprocess.call(path+'timetable.xlsx',shell=True)
-        
-        
-if __name__ == '__main__':
-    #type your path in here!
-    path = ' '
-    tbl = Timetable(2,15,2)
-    tbl.setConflicts()
-    print (tbl.conflicts)
-    tbl.generate(path,True)
+            subprocess.call(path,shell=True)
     
     
