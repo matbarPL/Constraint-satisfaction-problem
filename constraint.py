@@ -109,4 +109,3 @@ if __name__ == '__main__':
     print ('Number of conflicts: ' + str(pg.getBestTimetable().conflicts))
     path = 'C:/Users/Mateusz/Desktop/Semestr 6/Artificial Intelligence/Constraint satisfaction problem/'
     pg.getBestTimetable().generate(path,True)
-    
