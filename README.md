@@ -10,10 +10,16 @@ Preknowledge:
 
 Constraints:
 
--a teacher can teach maximum 4 times in a week 
+- a teacher can teach maximum <limit> times in a week 
 
--one room can be used only by one teacher in the sime time slot
+- one room can be used only by one teacher in the sime time slot
 
--a teacher can teach one subject in one time slot
+- a teacher can teach one subject in one time slot
 
-I used genetic algorithm. The population is created from timetables.
+- a teacher can teach only specified subject
+
+- subject has to be in a timetable <timesPerWeek> times
+  
+- teacher cannot teach in <notAvaialableHours>
+
+The population in genetic algorithm is created from timetables.
