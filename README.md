@@ -39,4 +39,5 @@ First timetable in a population
 ![](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/best.png)
 Best timetable generated after ~ 4 seconds.
 ![](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/specExWithoutCross.png)
+
 Estimated execution time ~4.5 seconds
