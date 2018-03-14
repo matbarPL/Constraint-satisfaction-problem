@@ -23,3 +23,5 @@ Constraints:
 - teacher cannot teach in <notAvaialableHours>
 
 The population in genetic algorithm is created from timetables.
+
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
