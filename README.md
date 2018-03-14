@@ -24,4 +24,4 @@ Constraints:
 
 The population in genetic algorithm is created from timetables.
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt text](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/mut.png)
