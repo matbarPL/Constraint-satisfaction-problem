@@ -7,10 +7,6 @@ input: excel file with specified constraints for every subject and teacher
 
 Input data
 
-Preknowledge: 
-
--teacher can teach different subject
-
 Constraints:
 
  - a teacher can teach maximum <limit> times in a week 
