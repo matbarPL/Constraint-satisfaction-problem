@@ -4,6 +4,7 @@ AI constraint satisfaction problem, timetable generating, created during the stu
 input: excel file with specified constraints for every subject and teacher  
 ![](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/subjects.png)
 ![](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/teachers.png)
+
 Input data
 
 Preknowledge: 
