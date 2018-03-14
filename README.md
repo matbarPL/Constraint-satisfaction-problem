@@ -24,6 +24,13 @@ Constraints:
 
 The population in genetic algorithm is created from timetables.
 
-![Timetable before mutation](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/mut0.png)
-
-![Timetable after mutation](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/mut.png)
+![](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/mut0.png)
+Timetable before mutation
+![](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/mut.png)
+Timetable after mutation
+![](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/cross1.png)
+![](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/cross2.png)
+Timetables chose to crossing
+![](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/aftercross.png)
+![](https://github.com/matbarPL/Constraint-satisfaction-problem/blob/master/aftercross2.png)
+Timetables after crossing
