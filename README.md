@@ -1,8 +1,7 @@
 # Constraint-satisfaction-problem
 AI constraint satisfaction problem, timetable generating, created during the student exchange program in collaboration with my friend Piotr Janus. 
 
-input: domain of values teachers: t1,t2,3...,tn, subject: s1,s2,...,sm, room: r1,r2,...rk and timedays = d11,d12,d13,d14,d15,d21,d22,....d54
-output: timetable which in which are no conflicts     
+input: excel file with specified constraints for every subject and teacher  
 
 Preknowledge: 
 
